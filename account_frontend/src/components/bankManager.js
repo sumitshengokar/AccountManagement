@@ -1,3 +1,4 @@
+//bank Manager Landing Page
 import React from 'react'
 import ReactDOM from 'react-dom';
 import { useHistory } from 'react-router-dom';
