@@ -11,8 +11,19 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 import axios from "axios";
 import DataTable from "react-data-table-component";
+import {makeStyles} from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+
+  
+  formControl: {
+    minWidth: "100%",
+  },
+
+}));
 
 function ViewMini() {
+  const classes = useStyles();
     const columns = [
         {
             name: "No",
@@ -86,7 +97,7 @@ function ViewMini() {
             </AppBar>
             {/*<Container maxWidth style={{justify:'center',marginLeft:'20%'}}>*/}
             <div style={{marginLeft:"20%"}}>
-                <FormControl required Label="Select Account" fullWidth variant="filled"
+                <FormControl className={classes.formControl} required Label="Select Account" fullWidth variant="filled"
                              InputLabelProps={{shrink: true}}>
                     <InputLabel id="Account">Select Account </InputLabel>
 

@@ -6,14 +6,25 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import {FormControl, Select,InputLabel,MenuItem} from '@mui/material';
+import {makeStyles} from '@mui/styles';
+
 
 
 import {Grid,Card,CardContent } from '@mui/material';
 
 //import Textfield from '@material-ui/core/TextField'
 //import Stack from '@material-ui/core/Stack';
+const useStyles = makeStyles((theme) => ({
+
+  
+    formControl: {
+      minWidth: "100%",
+    },
+  
+  }));
 
 function AccountTransfer(){
+    const classes = useStyles();
     const [customerName,setcustomerName] = useState("John wick");
     const [panNumber,setPanNumber]= useState("KKBPS2090");
     const [email,setEmail]=useState("abcd@gmail.com");
@@ -80,7 +91,7 @@ function AccountTransfer(){
 
                                 <Grid xs={6} sm={6} item style={{ marginTop: 20 }} >
                                  
-                                <FormControl  required Label="Select Account" fullWidth focused variant="filled" InputLabelProps={{ shrink: true }} > 
+                                <FormControl className={classes.formControl} required Label="Select Account" fullWidth focused variant="filled" InputLabelProps={{ shrink: true }} > 
                                     <InputLabel id="Account" >Select Account</InputLabel>
                                     
                                     

@@ -7,6 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import {makeStyles} from '@mui/styles';
 
 
 
@@ -15,7 +16,17 @@ import { Grid, Card, CardContent } from '@mui/material';
 //import Textfield from '@material-ui/core/TextField'
 //import Stack from '@material-ui/core/Stack';
 
+const useStyles = makeStyles((theme) => ({
+
+  
+    formControl: {
+      minWidth: "100%",
+    },
+  
+  }));
+
 function CashWithdraw() {
+    const classes = useStyles();
     const [customerName, setcustomerName] = useState("John wick");
     const [balance, setBalance] = useState(5000);
     const [email, setEmail] = useState("abcd@gmail.com");
@@ -82,7 +93,7 @@ function CashWithdraw() {
                                
                                 <Grid xs={6} sm={6} item style={{ marginTop: 20 }} >
                                  
-                                <FormControl  required Label="Select Account" fullWidth focused variant="filled" InputLabelProps={{ shrink: true }} > 
+                                <FormControl className={classes.formControl} required Label="Select Account" fullWidth focused variant="filled" InputLabelProps={{ shrink: true }} > 
                                     <InputLabel id="Account" >Select Account</InputLabel>
                                     
                                     
