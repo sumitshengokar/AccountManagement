@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import BankCustomer from '../components/bankCustomer';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,9 +15,11 @@ import Button from '@mui/material/Button';
 import { useHistory } from 'react-router-dom';
 import '../components/navbar.css';
 import CustomerTransactions from './customerTransactions';
+import axios from "axios";
 
 
 function Home() {
+    const [activeAccounts,setActiveAccounts]=useState(0);
     let history = useHistory();
 
     const handleDeposit = () => {
@@ -30,6 +32,15 @@ function Home() {
     const handleTransfer = () => {
         history.push("/transfer");
     }
+
+    useEffect(()=>{
+        const fetchData=async ()=>{
+                  const responseData=await axios.get("http://localhost:8083/active-accounts/102");
+                  setActiveAccounts(responseData.data);
+        }
+        fetchData().then(console.log("Data fetched"))
+
+    },[])
     return (
         <div>
             {/* <div style={{paddingTop: '0px', marginTop:'0px'}}>
@@ -40,14 +51,14 @@ function Home() {
             <AppBar position="" style={{ background: '#060b26',paddingTop:'0px' }}>
                 <Toolbar variant="dense">
                     <IconButton edge="start" color="primary" aria-label="menu" sx={{ mr: 2 }}>
-                        
+
                     </IconButton>
                     <Typography variant="h6" color="inherit"  style={{ marginLeft: '50%' }}>
                         HOME
                     </Typography>
                 </Toolbar>
             </AppBar>
-            
+
             {/* insert here */}
             {/* <Container > */}
             <div style={{ marginLeft: '19%', marginTop: '5px' }}>
@@ -59,7 +70,7 @@ function Home() {
                                     Active Accounts
                                 </Typography>
                                 <Typography variant="h5" component="div">
-                                    1
+                                    {activeAccounts}
                                 </Typography>
 
 
@@ -90,7 +101,7 @@ function Home() {
                 {/* ########fvjkldsfkdslfjdklfjfs */}
               </div>
 
-            <div style={{marginLeft:'19%',marginTop:'2%'}}> 
+            <div style={{marginLeft:'19%',marginTop:'2%'}}>
             <Grid container xs={12}  >
                 <Grid container xs={6} spacing={2}>
                   <Grid item xs={6} >
@@ -110,7 +121,7 @@ function Home() {
                             </CardActions>
                         </Card>
 
-                   </Grid>   
+                   </Grid>
                    <Grid item xs={6}>
                     <Card sx={{ minWidth: 180 }} style={{ border: '1px black solid' }}>
                             <CardContent>
@@ -127,7 +138,7 @@ function Home() {
                                 <Button size="small">Details</Button>
                             </CardActions>
                         </Card>
-                   </Grid> 
+                   </Grid>
                    <Grid item xs={12}>
                    <Card sx={{ minWidth: 90 }} style={{ border: '1px black solid' }}>
                             <Button className="btn btn-background-slide" onClick={handleDeposit}>
@@ -138,7 +149,7 @@ function Home() {
                                 </CardContent>
                             </Button>
                         </Card>
-                   </Grid>     
+                   </Grid>
                    <Grid item xs={12}>
                    <Card sx={{ minWidth: 90 }} style={{ border: '1px black solid' }}>
                             <Button className="btn btn-background-slide" onClick={handleWithdraw}>
@@ -149,7 +160,7 @@ function Home() {
                                 </CardContent>
                             </Button>
                         </Card>
-                   </Grid>     
+                   </Grid>
                    <Grid item xs={12}>
                    <Card sx={{ minWidth: 90 }} style={{ border: '1px black solid' }}>
                             <Button className="btn btn-background-slide" onClick={handleDeposit}>
@@ -160,41 +171,41 @@ function Home() {
                                 </CardContent>
                             </Button>
                         </Card>
-                   </Grid>     
+                   </Grid>
                 </Grid>
-                
+
                 <Grid container xs={6} style={{marginLeft:'10px'}}>
                     <Grid item xs={12}>
                     <Card sx={{ minWidth: 180 }} style={{border:'1px black solid'}}>
                                 <CardContent>
-                                    
+
                                     <Typography variant="h5" component="div">
                                     <CustomerTransactions />
                                     </Typography>
 
 
                                 </CardContent>
-                                
+
                             </Card>
 
-                    </Grid>    
+                    </Grid>
 
-                 </Grid>  
-                 
+                 </Grid>
+
             </Grid>
             </div>
-            
-           
-           
-           
-           
-           
-           
+
+
+
+
+
+
+
             </div>
-            
 
 
-          
+
+
 
 
     )

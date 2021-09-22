@@ -11,16 +11,16 @@ export const SidebarData =[
         cName:'nav-text'
     },
     {
-        title:'Mini_statement',
+        title:'Statement',
         path:'/mini-statement',
         icon:<AiIcons.AiFillHome/>,
         cName:'nav-text'
     },
     {
-        title:'View Accounts',
+        title:'Accounts',
         path:'/account-list',
         icon:<IoIcons.IoMdPeople/>,
         cName:'nav-text'
     },
-    
+
 ]

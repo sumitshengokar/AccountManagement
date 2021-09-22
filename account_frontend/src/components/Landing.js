@@ -1,3 +1,4 @@
+//Login Landing Page
 import React from 'react';
 import 'bootstrap/dist/css//bootstrap.min.css';
 import '../App.css';
@@ -33,7 +34,7 @@ function Landing() {
         <div className="inner">
           <Switch>
             <Route exact path='/' component={Home} />
-           
+
             <Route exact path="/loginm" component={Loginm} />
             <Route exact path="/loginc" component={Loginc} />
             <Route exact path="/forgotpwdc" component={ForgotPwdc} />

@@ -1,5 +1,6 @@
+//Customer Side Bar
 import React, { useState } from 'react';
-import { withRouter } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 // import { makeStyles } from '@material-ui/core/styles'
 import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
@@ -10,7 +11,7 @@ import { BrowserRouter as Router, Switch, Route, link } from 'react-router-dom';
 import { SidebarData } from './customerSidebarData';
 import './navbar.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-
+import axios from "axios";
 const navbar={
     backgroundColor: '#060b26',
     height: '80px',
@@ -62,38 +63,51 @@ const navText = {
 
 
 function BankCustomer() {
-    
+
     const [sidebar, setSidebar] = useState(true);
     const [name,setName]=useState("");
      const showSidebar = ()=> setSidebar(!sidebar);
 
-     
+ const fetchStatement=async (title)=>{
+     // console.log("Title= ",title);
+     if(title==="Statement")
+     {
+        // const data=await axios.get("http://localhost:8083/mini-statements/111/101");
+        //  console.log("Data =  ",data);
+     }
+    else if(title==="Accounts")
+     {
+
+     }
+ }
+
     return (
         <div className="navbar">
-            
-            
+
+
         <nav   className = {sidebar ? 'nav-menu-active': 'nav-menu'}>
-            
+
             <ul className="nav-menu-items">
                 <li href="#"className="navbar-toggle" >
                 <a to="#" className = "menu-bars">
                     <FaIcons.FaBars style={{color: 'white'}}/>
                  </a>
                 </li>
-                {SidebarData.map((item , index) => {
+                {SidebarData.map((item,index) => {
+                    const path=item.path;
                     return(
-                        <li key={index} className = "nav-text">
-                            <a href = {item.path} >
+                        <li key={index} className = "nav-text" onClick={()=>{fetchStatement(item.title)}}>
+                            <Link to={path} >
                                 {item.icon}
-                                <span>{item.title}</span> 
-                            </a>
+                                <span>{item.title}</span>
+                            </Link>
                         </li>
                     )
                 })}
             </ul>
         </nav>
 
-           
+
         </div>
 
     )
