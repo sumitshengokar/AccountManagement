@@ -16,17 +16,17 @@ import {Grid,Card,CardContent } from '@mui/material';
 //import Stack from '@material-ui/core/Stack';
 const useStyles = makeStyles((theme) => ({
 
-  
+
     formControl: {
       minWidth: "100%",
     },
-  
+
   }));
 
 function AccountTransfer(){
     const classes = useStyles();
     const [customerName,setcustomerName] = useState("John wick");
-    const [panNumber,setPanNumber]= useState("KKBPS2090");
+    const [transactionType,setTransactionType]= useState("");
     const [email,setEmail]=useState("abcd@gmail.com");
     const [amount,setAmount]=useState("");
     const [date,setDate]=useState(new Date().toLocaleDateString());
@@ -40,14 +40,14 @@ function AccountTransfer(){
     const handleClose = () => {
         setOpen(false);
       };
-    
+
       const handleOpen = () => {
         setOpen(true);
       };
 
       const handleAccount=(e)=>{
         const {name , value} = e.target;
-       
+
         setAccount(prevStep=>({
             ...prevStep,
             account:value
@@ -77,24 +77,24 @@ function AccountTransfer(){
                                 </Grid>
 
                                 <Grid xs={6} sm={6} item style={{marginTop: 20 }} >
-                                    <TextField inputProps={{ readOnly: true }} value={panNumber} placeholder="Enter the Pan Number" label="Pan Number" variant= "outlined" fullWidth required />
+                                    <TextField  value={transactionType}  label="Transaction Type" variant= "outlined" fullWidth required />
                                 </Grid>
 
                                 <Grid xs={6} sm={6} item style={{marginTop: 20 }} >
                                 <TextField inputProps={{ readOnly: true }} value={date} variant= "outlined" id="date" label="Date"  required fullWidth InputLabelProps={{ shrink: true}}  />
-                                
+
                                 </Grid>
                                 <Grid xs={6} sm={6} item style={{marginTop: 20 }} >
                                 <TextField  value={amount} onChange={handleAmount} variant= "outlined" id="amount" label="Amount"  required fullWidth InputLabelProps={{ shrink: true}}  />
-    
+
                                 </Grid>
 
                                 <Grid xs={6} sm={6} item style={{ marginTop: 20 }} >
-                                 
-                                <FormControl className={classes.formControl} required Label="Select Account" fullWidth focused variant="filled" InputLabelProps={{ shrink: true }} > 
+
+                                <FormControl className={classes.formControl} required Label="Select Account" fullWidth focused variant="filled" InputLabelProps={{ shrink: true }} >
                                     <InputLabel id="Account" >Select Account</InputLabel>
-                                    
-                                    
+
+
                                     <Select
                                         labelId="Select Account"
                                         defaultValue={"XXXX-XXXX-XX"}
@@ -126,7 +126,7 @@ function AccountTransfer(){
                                     </Select>
                                 </FormControl>
                                 </Grid>
-                                
+
                                 <Grid xs={12} style={{marginTop: 20 }} >
                                  <Button type="submit" variant= "contained" fullWidth required>Submit</Button>
                                 </Grid>
@@ -138,16 +138,16 @@ function AccountTransfer(){
                     </Card>
                     </Grid>
 
-                                
+
         </div>
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
 
 
     )

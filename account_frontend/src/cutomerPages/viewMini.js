@@ -15,7 +15,7 @@ import {makeStyles} from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
 
-  
+
   formControl: {
     minWidth: "100%",
   },
@@ -80,9 +80,9 @@ function ViewMini() {
         const responseData=await axios.get("http://localhost:8083/mini-statements/"+accountId+"/101");
          console.log("Data =  ",responseData.data);
          setRows(responseData.data);
-
-
     }
+
+
     return (
         <div>
             <AppBar position="static" style={{background: '#060b26'}}>

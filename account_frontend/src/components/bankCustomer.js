@@ -72,8 +72,7 @@ function BankCustomer() {
      // console.log("Title= ",title);
      if(title==="Statement")
      {
-        // const data=await axios.get("http://localhost:8083/mini-statements/111/101");
-        //  console.log("Data =  ",data);
+
      }
     else if(title==="Accounts")
      {

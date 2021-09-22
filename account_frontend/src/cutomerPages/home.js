@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import BankCustomer from '../components/bankCustomer';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,28 +12,33 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import '../components/navbar.css';
 import CustomerTransactions from './customerTransactions';
-import { FormControl, Select, InputLabel, MenuItem } from '@mui/material';
+import {FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import axios from "axios";
 import {makeStyles} from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
 
-  
+
     formControl: {
-      minWidth: "100%",
+        minWidth: "100%",
     },
-  
-  }));
+
+}));
 
 function Home() {
 
     const classes = useStyles();
     const [activeAccounts, setActiveAccounts] = useState(0);
     const [account, setAccount] = useState("");
-  const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [detailsObj, setDetailsObj] = useState({
+        latestDebitAmount: 0,
+        latestCreitAmount: 0,
+        balancemount: 0
+    })
 
     let history = useHistory();
 
@@ -50,20 +55,27 @@ function Home() {
 
     const handleClose = () => {
         setOpen(false);
-      };
-    
-      const handleOpen = () => {
+    };
+
+    const handleOpen = () => {
         setOpen(true);
-      };
-    
-      const handleAccount = (e) => {
-        const { name, value } = e.target;
-    
-        setAccount(prevStep => ({
-          ...prevStep,
-          account: value
-        }));
-      }
+    };
+
+    const handleAccount = async (e) => {
+        const accountId = e.target.value;
+        const debitResponseData = await axios.get("http://localhost:8083/last-debit-amount/" + accountId + "/101");
+        const creditResponseData = await axios.get("http://localhost:8083/last-credit-amount/" + accountId + "/101");
+        const balanceResponseData = await axios.get("http://localhost:8083/balance-amount/" + accountId);
+        let obj = {
+            latestDebitAmount: debitResponseData.data,
+            latestCreitAmount: creditResponseData.data,
+            balancemount: balanceResponseData.data
+        }
+        setDetailsObj(obj);
+        console.log("D= ", debitResponseData.data, "C = ", creditResponseData.data, "B = ", balanceResponseData.data);
+
+
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,20 +85,20 @@ function Home() {
         fetchData().then(console.log("Data fetched"))
 
     }, [])
-   
+    const accountRelatedDetails = async () => {
+
+
+    }
+
     return (
         <div>
-            {/* <div style={{paddingTop: '0px', marginTop:'0px'}}>
-            <h2 style={{textAlign:'center',color:'white',marginBottom: '5px', background:'#060b26'}}>
-                HOME
-                </h2>
-                </div> */}
-            <AppBar position="" style={{ background: '#060b26', paddingTop: '0px' }}>
+
+            <AppBar position="" style={{background: '#060b26', paddingTop: '0px'}}>
                 <Toolbar variant="dense">
-                    <IconButton edge="start" color="primary" aria-label="menu" sx={{ mr: 2 }}>
+                    <IconButton edge="start" color="primary" aria-label="menu" sx={{mr: 2}}>
 
                     </IconButton>
-                    <Typography variant="h6" color="inherit" style={{ marginLeft: '50%' }}>
+                    <Typography variant="h6" color="inherit" style={{marginLeft: '50%'}}>
                         HOME
                     </Typography>
                 </Toolbar>
@@ -94,18 +106,19 @@ function Home() {
 
             {/* insert here */}
             {/* <Container > */}
-            <div style={{ marginLeft: '19%', marginTop: '5px' }}>
+            <div style={{marginLeft: '19%', marginTop: '5px'}}>
                 <Grid container spacing={3}>
-                    <Grid item xs={6} xm={12} >
-                        <Card sx={{ minWidth: 180 }} style={{ border: '1px black solid' }}>
+                    <Grid item xs={6} xm={12}>
+                        <Card sx={{minWidth: 180, minHeight: 133}} style={{border: '1px black solid'}}>
                             <CardContent>
                                 {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                                     Active Accounts
                                 </Typography> */}
-                    
-                                <FormControl className={classes.formControl} required Label="Select Account" fullWidth variant="filled" InputLabelProps={{ shrink: true }} >
-                                    <InputLabel id="Account" >Account</InputLabel>
-                                    
+
+                                <FormControl className={classes.formControl} required Label="Select Account" fullWidth
+                                             variant="filled" InputLabelProps={{shrink: true}}>
+                                    <InputLabel id="Account">Account</InputLabel>
+
                                     <Select
                                         labelId="Select Account"
                                         defaultValue={"XXXX-XXXX-XX"}
@@ -116,26 +129,16 @@ function Home() {
                                         value={account}
                                         onChange={handleAccount}
                                     >
-                                        <MenuItem value="">
-                                            <em>None</em>
+                                        <MenuItem value="111">
+                                            <em>111</em>
                                         </MenuItem>
-                                        <MenuItem value="">
-                                            <em>Account 1</em>
+                                        <MenuItem value="999">
+                                            <em>999</em>
                                         </MenuItem>
-                                        <MenuItem value="">
-                                            <em>Account 2</em>
-                                        </MenuItem>
-
-                                        {/* {Object.keys(account).map(function (keyy, index) {
-
-                                            return (
-                                                <MenuItem value={account[keyy].id}>{`officer ${officer[keyy].id}`}</MenuItem>
-                                            )
-                                        })} */}
 
 
                                     </Select>
-                                    
+
                                 </FormControl>
                                 {/* <Typography variant="h5" component="div">
                                     {activeAccounts}
@@ -143,20 +146,20 @@ function Home() {
 
 
                             </CardContent>
-                            <CardActions>
-                                <Button size="small">Details</Button>
-                            </CardActions>
+                            {/*<CardActions>*/}
+                            {/*    <Button size="small">Details</Button>*/}
+                            {/*</CardActions>*/}
                         </Card>
                     </Grid>
-                    <Grid item xs={6} xm={12} >
-                        <Card sx={{ minWidth: 180,minHeight:133 }} style={{ border: '1px black solid' }}>
-                            <CardContent style={{display:'flex',gap:'50%',marginTop:'6%'}}>
-                                <Typography sx={{ fontSize: 14 }} variant="h5" component="div">
-                                    BALANCE : {500}
-                                    
+                    <Grid item xs={6} xm={12}>
+                        <Card sx={{minWidth: 180, minHeight: 133}} style={{border: '1px black solid'}}>
+                            <CardContent style={{display: 'flex', gap: '50%', marginTop: '6%'}}>
+                                <Typography sx={{fontSize: 14}} variant="h5" component="div">
+                                    BALANCE : {detailsObj.balancemount}
+
                                 </Typography>
-                                 <Typography sx={{ fontSize: 14 }} variant="h5" component="div">
-                                    Active Accounts :2
+                                <Typography sx={{fontSize: 14}} variant="h5" component="div">
+                                    Active Accounts :{activeAccounts}
                                 </Typography>
                                 {/* <Typography variant="h5" component="div">
                                     500
@@ -164,53 +167,49 @@ function Home() {
 
 
                             </CardContent>
-                            
+
                         </Card>
                     </Grid>
                 </Grid>
                 {/* ########fvjkldsfkdslfjdklfjfs */}
             </div>
 
-            <div style={{ marginLeft: '19%', marginTop: '2%' }}>
-                <Grid container xs={12}  >
+            <div style={{marginLeft: '19%', marginTop: '2%'}}>
+                <Grid container xs={12}>
                     <Grid container xs={6} spacing={2}>
-                        <Grid item xs={6} >
-                            <Card sx={{ minWidth: 180 }} style={{ border: '1px black solid' }}>
+                        <Grid item xs={6}>
+                            <Card sx={{minWidth: 180, minHeight: 133}} style={{border: '1px black solid'}}>
                                 <CardContent>
-                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                                         LATEST CREDIT
                                     </Typography>
                                     <Typography variant="h5" component="div">
-                                        100
+                                        {detailsObj.latestCreitAmount}
                                     </Typography>
 
 
                                 </CardContent>
-                                <CardActions>
-                                    <Button size="small">Details</Button>
-                                </CardActions>
+
                             </Card>
 
                         </Grid>
                         <Grid item xs={6}>
-                            <Card sx={{ minWidth: 180 }} style={{ border: '1px black solid' }}>
+                            <Card sx={{minWidth: 180, minHeight: 133}} style={{border: '1px black solid'}}>
                                 <CardContent>
-                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                    <Typography sx={{fontSize: 14}} color="text.secondary" gutterBottom>
                                         LATEST DEBIT
                                     </Typography>
                                     <Typography variant="h5" component="div">
-                                        100
+                                        {detailsObj.latestDebitAmount}
                                     </Typography>
 
 
                                 </CardContent>
-                                <CardActions>
-                                    <Button size="small">Details</Button>
-                                </CardActions>
+
                             </Card>
                         </Grid>
                         <Grid item xs={12}>
-                            <Card sx={{ minWidth: 90 }} style={{ border: '1px black solid' }}>
+                            <Card sx={{minWidth: 90}} style={{border: '1px black solid'}}>
                                 <Button className="btn btn-background-slide" onClick={handleDeposit}>
                                     <CardContent>
                                         <Typography variant="h5" component="div">
@@ -221,7 +220,7 @@ function Home() {
                             </Card>
                         </Grid>
                         <Grid item xs={12}>
-                            <Card sx={{ minWidth: 90 }} style={{ border: '1px black solid' }}>
+                            <Card sx={{minWidth: 90}} style={{border: '1px black solid'}}>
                                 <Button className="btn btn-background-slide" onClick={handleWithdraw}>
                                     <CardContent>
                                         <Typography variant="h5" component="div">
@@ -232,7 +231,7 @@ function Home() {
                             </Card>
                         </Grid>
                         <Grid item xs={12}>
-                            <Card sx={{ minWidth: 90 }} style={{ border: '1px black solid' }}>
+                            <Card sx={{minWidth: 90}} style={{border: '1px black solid'}}>
                                 <Button className="btn btn-background-slide" onClick={handleDeposit}>
                                     <CardContent>
                                         <Typography variant="h5" component="div">
@@ -244,13 +243,13 @@ function Home() {
                         </Grid>
                     </Grid>
 
-                    <Grid container xs={6} style={{ marginLeft: '10px' }}>
+                    <Grid container xs={6} style={{marginLeft: '10px'}}>
                         <Grid item xs={12}>
-                            <Card sx={{ minWidth: 180 }} style={{ border: '1px black solid' }}>
+                            <Card sx={{minWidth: 180}} style={{border: '1px black solid'}}>
                                 <CardContent>
 
                                     <Typography variant="h5" component="div">
-                                        <CustomerTransactions />
+                                        <CustomerTransactions/>
                                     </Typography>
 
 
@@ -266,16 +265,7 @@ function Home() {
             </div>
 
 
-
-
-
-
-
         </div>
-
-
-
-
 
 
     )
