@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Landing from './components/Landing';
+import BankCustomer from './components/bankCustomer';
+import BankManager from './components/bankManager';
+import ViewMini from './cutomerPages/viewMini';
+
+
+import Home from './cutomerPages/home';
+import AccountList from './cutomerPages/accountList';
+import AccountTransfer from './transactions/accountTransfer';
+// import Deposit from './transactions/deposit';
+// import PersonalDetails from './transactions/personalDetails';
+import FormUserDetails from './transactions/FormUserDetails';
+import CashWithdraw from './transactions/cashWithdraw';
+import ThirdPartyTransfer from './transactions/thirdPartyTransfer';
+import Manager from './components/bankManager';
+import NewCustomerAccount from './components/newCustomerAccount';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      
+      <Switch>
+      
+         <Route exact path="/"><Landing /></Route>
+         <Route exact path="/manager"><Manager /></Route>
+         <Route exact path="/new-customer"><NewCustomerAccount /></Route>
+         <Route exact path="/transfer">< ThirdPartyTransfer /></Route>
+         <Route exact path="/deposit"><AccountTransfer /></Route>
+         <Route exact path="/cash-withdrawl"><CashWithdraw /></Route>
+         <Route exact path="/customer"><BankCustomer /></Route>
+         <Route exact path="/manager"><BankManager /></Route>
+         <Route exact path="/account-list">
+           <BankCustomer />
+           <AccountList />
+           </Route>
+         <Route exact path="/mini-statement">
+           <BankCustomer />
+           <ViewMini />
+           </Route>
+         <Route exact path="/Home">
+            <Home />
+           <BankCustomer />
+           
+           </Route>
+         
+        
+      </Switch>
+    
+    </Router>
   );
 }
 
