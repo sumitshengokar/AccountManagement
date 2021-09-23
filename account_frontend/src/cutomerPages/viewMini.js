@@ -141,9 +141,9 @@ function ViewMini() {
             {/*        disableSelectionOnClick*/}
             {/*    />*/}
             {/*</div>*/}
-            <div>
+            <div style={{marginLeft:"20%"}}>
                 <DataTable
-                    title={"Forex Provider List"}
+                    title={"Transaction Details"}
                     columns={columns}
                     data={rows}
                     pagination
