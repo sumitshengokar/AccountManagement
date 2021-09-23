@@ -8,8 +8,8 @@ export default class ForgotPwdc extends Component {
                 <h3>Reset Customer Password</h3>
 
                 <div className="form-group">
-                    <label>Email</label>
-                    <input type="text" className="form-control" placeholder="Enter Customer Email" />
+                    <label>Customer ID</label>
+                    <input type="text" className="form-control" placeholder="Enter Customer ID" />
                 </div>
                 <div className="form-group">
                     <label>New Password</label>

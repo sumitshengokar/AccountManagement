@@ -1,8 +1,8 @@
-//Login Landing Page
 import React from 'react';
 import 'bootstrap/dist/css//bootstrap.min.css';
 import '../App.css';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import logo from "./BB.png"
 
 import Loginc from "../login/loginc.component";
 import Loginm from "../login/loginm.component";
@@ -17,13 +17,13 @@ import AboutUs from "../login/AboutUs";
 function Landing() {
   return (<Router>
     <div className="App">
-      <nav className="navbar navbar-expand-lg suryansh-navbar-light fixed-top">
+      <nav className="navbar navbar-expand-lg bg-dark fixed-top">
         <div className="container">
-        <Link className="navbar-brand" to={"/"}>Bank</Link>
+        <Link className="navbar-brand" to={"/"}><div class="imgbtn"><img src={logo} /></div></Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link className="nav-link" to={"/aboutus"}>About</Link>
+                <Link className="nav-link about" to={"/aboutus"}>ABOUT US</Link>
               </li>
             </ul>
           </div>
@@ -34,13 +34,13 @@ function Landing() {
         <div className="inner">
           <Switch>
             <Route exact path='/' component={Home} />
-
-            <Route exact path="/loginm" component={Loginm} />
+           
+            <Route path="/loginm" component={Loginm} />
             <Route exact path="/loginc" component={Loginc} />
             <Route exact path="/forgotpwdc" component={ForgotPwdc} />
             <Route exact path="/aboutus" component={AboutUs} />
             <Route exact path="/forgotpwdm" component={ForgotPwdm} />
-            <ProtectedRoute path="/custhome" component={CustomerHome} isAuth={false} />
+            <ProtectedRoute path="/custhome" component={CustomerHome} isAuth={true} />
             <Route exact path="/manghome" component={ManagerHome} />
 
           </Switch>

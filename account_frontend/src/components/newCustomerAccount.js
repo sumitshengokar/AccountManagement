@@ -1,4 +1,3 @@
-//customer creation page
 import React from 'react'
 //import image from './Images/Vector.jpg'
 import {CardMedia} from '@mui/material/';
@@ -8,13 +7,13 @@ import {Container} from '@mui/material'
 
 function NewCustomerAccount(){
     return (
-       // <Container maxWidth="md" style={{ backgroundImage: "url(/b4.jpg)" , backgroundSize: 'cover'}}>
+       // <Container maxWidth="md" style={{ backgroundImage: "url(/b4.jpg)" , backgroundSize: 'cover'}}> 
 
         <div className= 'App'>
 
         <Grid container>
-
-
+            
+            
             <Grid item xs={6} >
                 <Card style={{ maxWidth: 600, margin: "0 auto", marginTop:'10%'}}>
                     <CardContent >
@@ -53,7 +52,7 @@ function NewCustomerAccount(){
 
                                 <Grid xs={24} item style={{marginTop: 20 }} >
                                 <TextField variant= "outlined" id="date" label="Birthday" type="date"  required sx={{ width: 220 }} InputLabelProps={{ shrink: true,}}  />
-
+                                
                                 </Grid>
 
                                     <Grid xs={12} style={{marginTop: 20 }} >
@@ -66,10 +65,10 @@ function NewCustomerAccount(){
 
                 </Card>
 
-
-
-            </Grid>
-
+        
+            
+            </Grid> 
+            
             <Grid item xs={6} >
             {/* <Container maxWidth="md" > */}
                 <Card sx={{ maxWidth: "md" }} style={{marginTop:'10%'}}>\
@@ -81,22 +80,22 @@ function NewCustomerAccount(){
         image="https://cdn4.vectorstock.com/i/1000x1000/57/73/financial-transactions-concept-metaphor-vector-32835773.jpg"
         alt="Image"
       />
-
+                
 
                 </Card>
                 {/* </Container> */}
 
-
-
+        
+            
+            </Grid> 
+            
             </Grid>
+        </div>     
+        
+                  
 
-            </Grid>
-        </div>
-
-
-
-
-
+                          
+        
 
     )
 }
