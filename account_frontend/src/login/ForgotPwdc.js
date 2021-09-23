@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import Landing from "../components/Landing";
 
 export default class ForgotPwdc extends Component {
     render() {
         return (
             <div class="suryansh-general">
+                <Landing/>
             <form>
                 <h3>Reset Customer Password</h3>
 

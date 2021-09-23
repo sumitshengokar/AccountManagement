@@ -6,15 +6,18 @@ import logo1 from "./BB.jpg"
 
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
+import Landing from "../components/Landing";
 
-export default function Home()
+export default function Home1()
     {
         const history = useHistory();
         const handleClick = () => history.push('/loginc');
         const handleClick1 = () => history.push('/loginm');
 
         return (
-            <><div class="split left">
+            <>
+                <Landing/>
+                <div class="split left">
                 <div class="centered">
                     <div class="suryansh-accnt">
                         <div class="main-container">
@@ -33,5 +36,5 @@ export default function Home()
                     </div>
             </div></>
             );
-    
+
 }

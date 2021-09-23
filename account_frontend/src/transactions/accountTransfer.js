@@ -57,7 +57,11 @@ function AccountTransfer() {
         console.log(response.data);
         if(response.data===true)
         {
-            history.push('/home');
+            alert("Transaction Successful .Redirecting ....");
+            setTimeout(()=>history.push('/home'),800);
+        }
+        else{
+            alert("Transaction Failed");
         }
     }
     return (
@@ -74,18 +78,6 @@ function AccountTransfer() {
                         </Typography>
 
                             <Grid container spacing={3}>
-                                <Grid xs={12} sm={12} item style={{marginTop: 20}}>
-                                    <TextField inputProps={{readOnly: true}} value={customerName}
-                                               placeholder="Enter the customer name" label="Name" variant="outlined"
-                                               fullWidth required/>
-
-                                </Grid>
-
-                                <Grid xs={12} sm={12} item style={{marginTop: 20}}>
-                                    <TextField inputProps={{readOnly: true}} value={email} type="email"
-                                               placeholder="Enter email address" label="Email" variant="outlined"
-                                               fullWidth required/>
-                                </Grid>
 
                                 <Grid xs={6} sm={6} item style={{marginTop: 20}}>
                                     <TextField value={transactionType} onChange={(e) => {
@@ -129,6 +121,10 @@ function AccountTransfer() {
                                             </MenuItem>
                                             <MenuItem value="999">
                                                 <em>999</em>
+                                            </MenuItem>
+
+                                            <MenuItem value="20">
+                                                <em>20</em>
                                             </MenuItem>
 
                                             {/* {Object.keys(account).map(function (keyy, index) {

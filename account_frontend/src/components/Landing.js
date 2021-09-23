@@ -3,10 +3,10 @@ import 'bootstrap/dist/css//bootstrap.min.css';
 import '../App.css';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import logo from "./BB.png"
+import Home from "../cutomerPages/home";
 
 import Loginc from "../login/loginc.component";
 import Loginm from "../login/loginm.component";
-import Home from "../login/home.component";
 import ForgotPwdc from "../login/ForgotPwdc";
 import ForgotPwdm from "../login/ForgotPwdm";
 import CustomerHome from "../login/CustomerHome";
@@ -15,7 +15,7 @@ import ProtectedRoute from "../login/ProtectedRoute";
 import AboutUs from "../login/AboutUs";
 
 function Landing() {
-  return (<Router>
+  return (
     <div className="App">
       <nav className="navbar navbar-expand-lg bg-dark fixed-top">
         <div className="container">
@@ -29,24 +29,7 @@ function Landing() {
           </div>
         </div>
       </nav>
-
-      <div className="suryansh-outer">
-        <div className="inner">
-          <Switch>
-            <Route exact path='/' component={Home} />
-           
-            <Route path="/loginm" component={Loginm} />
-            <Route exact path="/loginc" component={Loginc} />
-            <Route exact path="/forgotpwdc" component={ForgotPwdc} />
-            <Route exact path="/aboutus" component={AboutUs} />
-            <Route exact path="/forgotpwdm" component={ForgotPwdm} />
-            <ProtectedRoute path="/custhome" component={CustomerHome} isAuth={true} />
-            <Route exact path="/manghome" component={ManagerHome} />
-
-          </Switch>
-        </div>
-      </div>
-    </div></Router>
+    </div>
   );
 }
 

@@ -58,10 +58,14 @@ function CashWithdraw() {
         }
         const response = await axios.post("http://localhost:8083/cash-withdrawl/" + account, obj);
         console.log(response.data);
-        if(response.data===true)
-        {
-            history.push('/home');
+        if(response.data===true) {
+            alert("Transaction Successful .Redirecting ....");
+            setTimeout(()=>history.push('/home'),800);
         }
+        else{
+            alert("Transaction Failed");
+        }
+
     }
     return (
 
@@ -133,6 +137,10 @@ function CashWithdraw() {
                                         <MenuItem value="999">
                                             <em>999</em>
                                         </MenuItem>
+                                        <MenuItem value="20">
+                                            <em>20</em>
+                                        </MenuItem>
+
 
                                         {/* {Object.keys(account).map(function (keyy, index) {
 

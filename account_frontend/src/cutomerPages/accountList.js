@@ -43,7 +43,7 @@ function AccountList() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const responseData = await axios.get("http://localhost:8083/accounts/101");
+            const responseData = await axios.get("http://localhost:8083/accounts/"+localStorage.getItem("user"));
             // console.log(responseData.data.accounts);
             const dataList=[];
             const accarray = responseData.data.accounts;

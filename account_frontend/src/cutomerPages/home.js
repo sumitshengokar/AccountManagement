@@ -34,6 +34,8 @@ function Home() {
     const [activeAccounts, setActiveAccounts] = useState(0);
     const [account, setAccount] = useState("");
     const [open, setOpen] = useState(false);
+    const [customerId,setCustomerId]=useState(null);
+    const [accountArray,setAccountArray]=useState([]);
     const [detailsObj, setDetailsObj] = useState({
         latestDebitAmount: 0,
         latestCreitAmount: 0,
@@ -63,8 +65,8 @@ function Home() {
 
     const handleAccount = async (e) => {
         const accountId = e.target.value;
-        const debitResponseData = await axios.get("http://localhost:8083/last-debit-amount/" + accountId + "/101");
-        const creditResponseData = await axios.get("http://localhost:8083/last-credit-amount/" + accountId + "/101");
+        const debitResponseData = await axios.get("http://localhost:8083/last-debit-amount/" + accountId + "/"+customerId);
+        const creditResponseData = await axios.get("http://localhost:8083/last-credit-amount/" + accountId + "/"+customerId);
         const balanceResponseData = await axios.get("http://localhost:8083/balance-amount/" + accountId);
         let obj = {
             latestDebitAmount: debitResponseData.data,
@@ -79,8 +81,12 @@ function Home() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const responseData = await axios.get("http://localhost:8083/active-accounts/102");
+            let customerId=localStorage.getItem("user");
+            const responseData = await axios.get("http://localhost:8083/active-accounts/"+customerId);
+            const responseData1=await axios.get("http://localhost:8083/getaccountnumbers/"+customerId);
+            setAccountArray(responseData1.data);
             setActiveAccounts(responseData.data);
+            setCustomerId(customerId);
         }
         fetchData().then(console.log("Data fetched"))
 
@@ -129,12 +135,21 @@ function Home() {
                                         value={account}
                                         onChange={handleAccount}
                                     >
-                                        <MenuItem value="111">
-                                            <em>111</em>
-                                        </MenuItem>
-                                        <MenuItem value="999">
-                                            <em>999</em>
-                                        </MenuItem>
+
+                                        {accountArray.map((item,index)=>{
+                                           return(
+                                            <MenuItem value={item}>
+                                                {console.log("Value =",item)}
+                                                <em>{item}</em>
+                                            </MenuItem>
+                                           )
+                                        })}
+
+
+
+                                        {/*<MenuItem value="999">*/}
+                                        {/*    <em>999</em>*/}
+                                        {/*</MenuItem>*/}
 
 
                                     </Select>

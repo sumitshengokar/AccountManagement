@@ -1,5 +1,5 @@
 //view mini statements page
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import BankCustomer from '../components/bankCustomer';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ViewMini() {
+    const [arr,setArr]=useState([]);
   const classes = useStyles();
     const columns = [
         {
@@ -77,12 +78,22 @@ function ViewMini() {
 
     const handleAccount = async (e) => {
         const accountId=e.target.value;
-        const responseData=await axios.get("http://localhost:8083/mini-statements/"+accountId+"/101");
+        const responseData=await axios.get("http://localhost:8083/mini-statements/"+accountId+"/"+localStorage.getItem("user"));
          console.log("Data =  ",responseData.data);
          setRows(responseData.data);
     }
 
+    useEffect(() => {
+        const fetchData = async () => {
+            let customerId=localStorage.getItem("user");
+            const responseData1=await axios.get("http://localhost:8083/getaccountnumbers/"+customerId);
+            setArr(responseData1.data);
 
+
+        }
+        fetchData().then(console.log("Data fetched"))
+
+    }, [])
     return (
         <div>
             <AppBar position="static" style={{background: '#060b26'}}>
@@ -113,12 +124,15 @@ function ViewMini() {
                         onChange={handleAccount}
                     >
 
-                        <MenuItem value="111"   >
-                            <em> 111</em>
-                        </MenuItem>
-                        <MenuItem value="999">
-                            <em>999</em>
-                        </MenuItem>
+                        {arr.map((item,index)=>{
+                            return(
+                                <MenuItem value={item}>
+                                    {console.log("Value =",item)}
+                                    <em>{item}</em>
+                                </MenuItem>
+                            )
+                        })}
+
 
                         {/* {Object.keys(account).map(function (keyy, index) {
 

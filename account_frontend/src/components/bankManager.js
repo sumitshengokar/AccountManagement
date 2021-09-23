@@ -38,6 +38,10 @@ export default function Manager() {
         history.push('/new-customer');
 
     }
+
+    const logout=()=>{
+        history.push('/');
+    }
     return (
         <>
             <div style={bg}>
@@ -72,9 +76,13 @@ export default function Manager() {
                             <p class="card-text">We found below accounts linked with {customerName}'s PAN card number.</p>
                         </div>
                         <ul>{listItems}</ul>
-                        <div class="card-body">
+                        <div class="card-body" style={{display:"flex",gap:"15%"}}>
                             <button className="btn btn-outline-success" style={{ backgroundColor: "#ADD8E6", color: "black" }} type="submit" onClick={handleClick}>Create New Account</button>
+                            <button className="btn btn-outline-success" style={{ backgroundColor: "#ADD8E6", color: "black" }} type="submit" onClick={logout}>Log Out</button>
+
                         </div>
+
+
                     </div>
                 </div>}
 
